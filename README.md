@@ -1,129 +1,110 @@
-Pattern Recognition Using Spiking Neural Networks (SNN)
+# Pattern Recognition Using Spiking Neural Networks (SNN)
 
+## Overview
+This project presents a CMOS-based Spiking Neural Network (SNN) for pattern recognition using Leaky Integrate-and-Fire (LIF) neurons and Spike-Timing-Dependent Plasticity (STDP) synapses. The system demonstrates biologically inspired, event-driven computation with on-chip learning and inference, targeting low-power neuromorphic hardware implementations.
 
-Overview
+The work is derived from and inspired by the IEEE VLSI Journal paper:
+“Circuit Implementation of On-Chip Trainable Spiking Neural Network using CMOS based Memristive STDP Synapses and LIF Neurons” (Integration, 2024).
 
-This project presents a CMOS-based spiking neural network (SNN) for pattern recognition using Leaky Integrate-and-Fire (LIF) neurons and Spike-Timing-Dependent Plasticity (STDP) synapses. The system is inspired by biologically plausible learning mechanisms and targets low-power neuromorphic computing for edge applications.
+A scaled-down architecture was implemented and validated at the transistor level using Cadence Virtuoso due to simulation time and computational constraints.
 
-The work is based on and derived from the paper
-“Circuit Implementation of On-Chip Trainable Spiking Neural Network using CMOS based Memristive STDP Synapses and LIF Neurons” (Integration, The VLSI Journal, 2024), with a scaled-down and simplified architecture implemented and validated at the transistor level using Cadence Virtuoso.
+---
 
-Key Objective
+## Objectives
+- Design and simulate a compact CMOS-based SNN architecture
+- Implement LIF neuron circuits suitable for neuromorphic systems
+- Realize STDP-based synaptic learning using CMOS memristive circuits
+- Demonstrate pattern recognition through circuit-level simulations
+- Analyze training and inference behavior in a crossbar-based architecture
 
-To design and simulate a compact, fully CMOS-based SNN architecture
+---
 
-To demonstrate pattern recognition using on-chip learning
+## System Architecture
+The implemented SNN consists of the following components:
 
-To study LIF neuron behavior, STDP learning, and crossbar-based computation
+### Input Layer
+- Two CMOS-based Leaky Integrate-and-Fire (LIF) neurons  
+- Converts input voltage patterns into spike trains
 
-To validate learning and inference through circuit-level simulations
+### Synaptic Layer
+- A 2×3 CMOS memristive STDP crossbar array  
+- Synaptic weights updated based on spike timing relationships
 
-System Architecture
+### Output Layer
+- Three LIF neurons  
+- Winner-Take-All (WTA) behavior achieved through inhibitory mechanisms
 
-The implemented SNN consists of:
+The network is trained to recognize three distinct 2×1 pixel input patterns.
 
-Input Layer: 2 CMOS-based LIF neurons
+---
 
-Synaptic Layer: 2×3 CMOS memristive STDP crossbar array
+## Major Building Blocks
 
-Output Layer: 3 LIF neurons with Winner-Take-All (WTA) behavior
+### Leaky Integrate-and-Fire (LIF) Neuron
+- CMOS implementation of biologically inspired neuron behavior
+- Includes current integration, leakage, threshold detection, spike generation, and reset
+- Used for both input and output neuron stages
 
-The network is trained to recognize three distinct 2×1 pixel input patterns using spike-based learning.
+### STDP Synapse Circuit
+- Pair-based STDP implemented using CMOS memristive synapse circuits
+- Supports long-term potentiation and long-term depression
+- Synaptic weight evolution governed by relative spike timing
 
-Major Building Blocks
-1. Leaky Integrate-and-Fire (LIF) Neuron
+### CMOS Crossbar Array
+- Enables parallel weighted summation of synaptic currents
+- Demonstrates in-memory computation suitable for neuromorphic systems
 
-Designed using CMOS transistors
+---
 
-Implements:
+## Modes of Operation
 
-Current integration
+### Training Mode
+- Synaptic weights updated using STDP learning
+- Each output neuron trained sequentially
+- Weights converge based on spike-timing relationships
 
-Leakage mechanism
+### Inference Mode
+- Learned synaptic weights are fixed
+- Input patterns classified using spike-based computation
+- Winner-Take-All mechanism ensures correct pattern recognition
 
-Threshold-based firing
+---
 
-Reset and refractory behavior
+## Tools and Technology
+- Cadence Virtuoso
+- GPDK 180 nm CMOS Technology
+- Analog circuit design and transient simulations
 
-Used as both input and output neurons
+---
 
-2. STDP Synapse Circuit
+## Results
+- Successful demonstration of LIF neuron spiking behavior
+- Verified STDP-based synaptic weight adaptation
+- Correct classification of input patterns during inference
+- Circuit-level validation of learning and recognition functionality
 
-Pair-based STDP implemented using CMOS memristive synapse circuits
+---
 
-Synaptic weight change depends on relative timing of pre- and post-synaptic spikes
+## Scope and Limitations
+- Scaled-down crossbar size implemented due to simulation constraints
+- Limited number of input patterns
+- Serves as a proof-of-concept for larger neuromorphic architectures
 
-Supports long-term potentiation (LTP) and long-term depression (LTD)
+---
 
-3. CMOS Crossbar Array
+## Key Learnings
+- Transistor-level design of neuromorphic circuits
+- Practical implementation of STDP learning mechanisms
+- Design trade-offs in low-power analog VLSI systems
+- Crossbar-based computation for spiking neural networks
 
-2×3 synaptic crossbar connecting input and output neurons
+---
 
-Enables parallel weighted summation
-
-Demonstrates in-memory computation behavior
-
-Modes of Operation
-🔹 Training Mode
-
-Synaptic weights updated using STDP learning
-
-Each output neuron trained sequentially
-
-Weights converge based on spike timing relationships
-
-🔹 Inference Mode
-
-Trained weights are fixed
-
-Network performs real-time pattern recognition
-
-Winner-Take-All (WTA) mechanism ensures correct classification
-
-Tools & Technology
-
-Cadence Virtuoso
-
-GPDK 180 nm CMOS Technology
-
-Analog circuit design and transient simulations
-
-Results
-
-Successful recognition of predefined input patterns
-
-Verified:
-
-LIF neuron spiking behavior
-
-STDP-based weight adaptation
-
-Correct classification during inference
-
-Demonstrated robustness of learning at the circuit level
-
-Key Learnings
-
-Transistor-level implementation of neuromorphic circuits
-
-Practical understanding of STDP learning mechanisms
-
-Design trade-offs in low-power analog VLSI
-
-Crossbar-based computation for neuromorphic systems
-
-Scope & Limitations
-
-Implemented a scaled-down version of the reference architecture
-
-Limited crossbar size due to simulation time and computational constraints
-
-Serves as a proof-of-concept for larger neuromorphic systems
-
-Reference
-
-This project is based on:
-
-Sahibia Kaur Vohra et al.,
-Circuit implementation of on-chip trainable spiking neural network using CMOS based memristive STDP synapses and LIF neurons,
+## Reference
+S. K. Vohra et al.,  
+“Circuit Implementation of On-Chip Trainable Spiking Neural Network using CMOS based Memristive STDP Synapses and LIF Neurons,”  
 Integration, The VLSI Journal, 2024.
+
+---
+
+## Repository Structure
